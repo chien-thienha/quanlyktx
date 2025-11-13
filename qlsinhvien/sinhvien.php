@@ -228,7 +228,7 @@ if (isset($_SESSION['toast_message'])) {
                 </div>
 
                 <div class="search-section">
-                    <label for="search">Tìm kiếm</label>
+                    <label for="search">Tìm kiếm:</label>
                     <div class="search-box">
                         <input type="text" name="search" placeholder="Tìm kiếm thông tin" class="search-input" id="searchInput" 
                                value="<?= htmlspecialchars($search_keyword) ?>" oninput="handleSearchInput()">

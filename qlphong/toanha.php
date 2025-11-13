@@ -204,7 +204,7 @@ if (!empty($params)) {
                 <div class="filter-row">
                     <div class="filter-group">
                         <label for="filter_tinhtrang">
-                            Tình trạng
+                            Tình trạng:
                             <?php if ($filter_tinhtrang !== 'all'): ?>
                                 <span class="active-filter-indicator">✓</span>
                             <?php endif; ?>
@@ -218,7 +218,7 @@ if (!empty($params)) {
                     
                     <div class="filter-group">
                         <label for="filter_trangthai">
-                            Trạng thái hoạt động
+                            Trạng thái hoạt động:
                             <?php if ($filter_trangthai !== 'all'): ?>
                                 <span class="active-filter-indicator">✓</span>
                             <?php endif; ?>
@@ -231,7 +231,7 @@ if (!empty($params)) {
                     </div>
                     
                     <div class="filter-group">
-                        <label for="search">Tìm kiếm</label>
+                        <label for="search">Tìm kiếm:</label>
                         <div class="search-container">
                             <input type="text" id="search" name="search" value="<?php echo htmlspecialchars($search_keyword); ?>" 
                                    placeholder="Tìm kiếm thông tin" 

@@ -212,7 +212,7 @@ $toa_nha_result = $conn->query("SELECT idtoanha, toanha FROM toanha ORDER BY toa
                 
                 <div class="filter-row">
                     <div class="filter-group">
-                        <label for="filter_tinhtrang">Tình trạng</label>
+                        <label for="filter_tinhtrang">Tình trạng:</label>
                         <select id="filter_tinhtrang" name="tinhtrang" onchange="this.form.submit()">
                             <option value="all" <?php echo $filter_tinhtrang == 'all' ? 'selected' : ''; ?>>Tất cả tình trạng</option>
                             <option value="Còn trống" <?php echo $filter_tinhtrang == 'Còn trống' ? 'selected' : ''; ?>>Còn trống</option>
@@ -221,7 +221,7 @@ $toa_nha_result = $conn->query("SELECT idtoanha, toanha FROM toanha ORDER BY toa
                     </div>
                     
                     <div class="filter-group">
-                        <label for="filter_trangthai">Trạng thái hoạt động</label>
+                        <label for="filter_trangthai">Trạng thái hoạt động:</label>
                         <select id="filter_trangthai" name="trangthai" onchange="this.form.submit()">
                             <option value="all" <?php echo $filter_trangthai == 'all' ? 'selected' : ''; ?>>Tất cả trạng thái</option>
                             <option value="Hoạt động" <?php echo $filter_trangthai == 'Hoạt động' ? 'selected' : ''; ?>>Hoạt động</option>
@@ -230,7 +230,7 @@ $toa_nha_result = $conn->query("SELECT idtoanha, toanha FROM toanha ORDER BY toa
                     </div>
                     
                     <div class="filter-group">
-                        <label for="search">Tìm kiếm</label>
+                        <label for="search">Tìm kiếm:</label>
                         <div class="search-container">
                             <input type="text" id="search" name="search" value="<?php echo htmlspecialchars($search_keyword); ?>" 
                                    placeholder="Tìm kiếm thông tin" oninput="handleSearchInput()">

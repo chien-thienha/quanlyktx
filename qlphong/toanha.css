@@ -191,7 +191,6 @@ h1 {
 /* Active filter indicator */
 .active-filter-indicator {
     color: #27ae60;
-    font-weight: bold;
     margin-left: 5px;
 }
 

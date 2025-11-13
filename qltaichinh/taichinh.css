@@ -21,7 +21,7 @@ body {
 /* Header styles */
 .finance-page h1 {
     color: #2c3e50;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     font-size: 28px;
     font-weight: 600;
     text-align: left;
@@ -31,7 +31,6 @@ body {
 .tab-menu {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
     gap: 10px;
 }
 
@@ -44,7 +43,7 @@ body {
     border: 2px solid #3498db;
     border-radius: 8px;
     background: white;
-    color: #3498db;
+    color: #2c3e50;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -73,9 +72,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    gap: 20px;
+    gap: 10px;
     background: white;
-    padding: 25px;
+    padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     flex-wrap: wrap;
@@ -771,5 +770,120 @@ select:focus {
     .table-container {
         box-shadow: none;
         border: 1px solid #ddd;
+    }
+}
+
+/* Modal form cho khoản thu (khoanthu.php) */
+#khoanthuForm {
+    padding: 0 30px 30px;
+}
+
+#khoanthuForm .form-group {
+    margin-bottom: 20px;
+}
+
+#khoanthuForm .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+#khoanthuForm .form-group input,
+#khoanthuForm .form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: white;
+    font-family: inherit;
+}
+
+#khoanthuForm .form-group input:focus,
+#khoanthuForm .form-group textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+#khoanthuForm .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Form actions cho khoản thu */
+#khoanthuForm .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ecf0f1;
+}
+
+#khoanthuForm .form-actions button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    min-width: 140px;
+}
+
+#khoanthuForm .form-actions button[type="submit"] {
+    background: linear-gradient(135deg, #27ae60, #219a52);
+    color: white;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+#khoanthuForm .form-actions button[type="submit"]:hover {
+    background: linear-gradient(135deg, #219a52, #1e8449);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+}
+
+#khoanthuForm .form-actions button[type="button"] {
+    background: #95a5a6;
+    color: white;
+}
+
+#khoanthuForm .form-actions button[type="button"]:hover {
+    background: #7f8c8d;
+    transform: translateY(-2px);
+}
+
+/* Placeholder styling */
+::placeholder {
+    color: #a0a0a0;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: #a0a0a0;
+}
+
+::-ms-input-placeholder {
+    color: #a0a0a0;
+}
+
+/* Responsive cho form khoản thu */
+@media (max-width: 768px) {
+    #khoanthuForm {
+        padding: 0 20px 20px;
+    }
+    
+    #khoanthuForm .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    #khoanthuForm .form-actions button {
+        width: 100%;
+        min-width: auto;
     }
 }

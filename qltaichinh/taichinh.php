@@ -255,19 +255,19 @@ if (isset($_SESSION['toast_message'])) {
                 <div class="filter-group">
                     <label>Tìm kiếm:</label>
                     <div class="search-box">
-    <input type="text" name="search" placeholder="Tìm kiếm thông tin" class="search-input" 
-           value="<?= htmlspecialchars($search_keyword) ?>" id="searchInput" oninput="handleSearchInput()">
-    
-    <!-- Nút Xóa tìm kiếm -->
-    <button type="button" class="clear-search-btn" id="clearSearchBtn" onclick="clearSearch()" style="display: <?= $search_keyword ? 'flex' : 'none' ?>;">
-        <i class="fas fa-times"></i>
-    </button>
+                        <input type="text" name="search" placeholder="Tìm kiếm thông tin" class="search-input" 
+                            value="<?= htmlspecialchars($search_keyword) ?>" id="searchInput" oninput="handleSearchInput()">
+                        
+                        <!-- Nút Xóa tìm kiếm -->
+                        <button type="button" class="clear-search-btn" id="clearSearchBtn" onclick="clearSearch()" style="display: <?= $search_keyword ? 'flex' : 'none' ?>;">
+                            <i class="fas fa-times"></i>
+                        </button>
 
-    <!-- Loading spinner -->
-    <div class="search-loading" id="searchLoading" style="display: none;">
-        <i class="fas fa-spinner fa-spin"></i>
-    </div>
-</div>
+                        <!-- Loading spinner -->
+                        <div class="search-loading" id="searchLoading" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="filter-group">
@@ -282,6 +282,7 @@ if (isset($_SESSION['toast_message'])) {
             <table class="finance-table">
                 <thead>
                     <tr>
+                        <th>STT</th>
                         <th>Mã giao dịch</th>
                         <th>Mã sinh viên</th>
                         <th>Tên sinh viên</th>
@@ -294,11 +295,13 @@ if (isset($_SESSION['toast_message'])) {
                 <tbody>
                     <?php if (empty($transactions)): ?>
                     <tr>
-                        <td colspan="7" style="text-align: center;">Không có dữ liệu giao dịch</td>
+                        <td colspan="8" style="text-align: center;">Không có dữ liệu giao dịch</td>
                     </tr>
                     <?php else: ?>
+                    <?php $stt = 1; ?>
                     <?php foreach ($transactions as $transaction): ?>
                     <tr data-id="<?= $transaction['idtaichinh'] ?>" data-ngaygiaodich="<?= $transaction['ngaygiaodich'] ?>">
+                        <td><?= $stt++ ?></td>
                         <td><?= htmlspecialchars($transaction['magiaodich']) ?></td>
                         <td><?= htmlspecialchars($transaction['masinhvien']) ?></td>
                         <td><?= htmlspecialchars($transaction['tensinhvien']) ?></td>
@@ -452,15 +455,15 @@ if (isset($_SESSION['toast_message'])) {
             const cells = row.querySelectorAll('td');
             
             document.getElementById('transactionId').value = id;
-            document.getElementById('magiaodich').value = cells[0].textContent.trim();
+            document.getElementById('magiaodich').value = cells[1].textContent.trim(); // STT là cột 0, Mã GD là cột 1
             // Đặt readonly cho mã giao dịch khi sửa
             document.getElementById('magiaodich').readOnly = true;
-            document.getElementById('masinhvien').value = cells[1].textContent.trim();
-            document.getElementById('tensinhvien').value = cells[2].textContent.trim();
-            document.getElementById('loaigiaodich').value = cells[3].textContent.trim();
+            document.getElementById('masinhvien').value = cells[2].textContent.trim(); // Mã SV là cột 2
+            document.getElementById('tensinhvien').value = cells[3].textContent.trim(); // Tên SV là cột 3
+            document.getElementById('loaigiaodich').value = cells[4].textContent.trim(); // Loại GD là cột 4
             document.getElementById('ngaygiaodich').value = row.getAttribute('data-ngaygiaodich');
             
-            const statusBadge = cells[5].querySelector('.status-badge');
+            const statusBadge = cells[6].querySelector('.status-badge'); // Trạng thái là cột 6
             document.getElementById('trangthaiSelect').value = statusBadge.textContent.trim();
         }
     }
@@ -471,23 +474,23 @@ if (isset($_SESSION['toast_message'])) {
         if (row) {
             const cells = row.querySelectorAll('td');
             const transactionInfo = {
-                magiaodich: cells[0].textContent.trim(),
-                masinhvien: cells[1].textContent.trim(),
-                tensinhvien: cells[2].textContent.trim(),
-                loaigiaodich: cells[3].textContent.trim(),
+                magiaodich: cells[1].textContent.trim(), // Mã GD là cột 1
+                masinhvien: cells[2].textContent.trim(), // Mã SV là cột 2
+                tensinhvien: cells[3].textContent.trim(), // Tên SV là cột 3
+                loaigiaodich: cells[4].textContent.trim(), // Loại GD là cột 4
                 ngaygiaodich: row.getAttribute('data-ngaygiaodich'),
-                trangthai: cells[5].querySelector('.status-badge').textContent.trim()
+                trangthai: cells[6].querySelector('.status-badge').textContent.trim() // Trạng thái là cột 6
             };
             
             alert(`Thông tin giao dịch:\n
-Mã GD: ${transactionInfo.magiaodich}
-Mã SV: ${transactionInfo.masinhvien}
-Tên SV: ${transactionInfo.tensinhvien}
-Loại: ${transactionInfo.loaigiaodich}
-Ngày GD: ${transactionInfo.ngaygiaodich}
-Trạng thái: ${transactionInfo.trangthai}`);
-        }
-    }
+                Mã GD: ${transactionInfo.magiaodich}
+                Mã SV: ${transactionInfo.masinhvien}
+                Tên SV: ${transactionInfo.tensinhvien}
+                Loại: ${transactionInfo.loaigiaodich}
+                Ngày GD: ${transactionInfo.ngaygiaodich}
+                Trạng thái: ${transactionInfo.trangthai}`);
+                }
+            }
 
     function deleteTransaction(id) {
         if (confirm('Bạn có chắc muốn xóa giao dịch này?')) {
