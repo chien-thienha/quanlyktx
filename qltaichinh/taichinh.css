@@ -21,58 +21,52 @@ body {
 /* Header styles */
 .finance-page h1 {
     color: #2c3e50;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-size: 28px;
     font-weight: 600;
-    text-align: center;
+    text-align: left;
 }
 
 /* Tab menu styles */
 .tab-menu {
     display: flex;
     justify-content: center;
-    margin-bottom: 30px;
-    background: white;
-    border-radius: 12px;
-    padding: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-bottom: 20px;
+    gap: 10px;
 }
 
 .tab-menu a {
     text-decoration: none;
-    flex: 1;
 }
 
 .tab-btn {
-    width: 100%;
-    padding: 12px 24px;
-    border: none;
+    padding: 12px 30px;
+    border: 2px solid #3498db;
     border-radius: 8px;
-    background: transparent;
-    color: #7f8c8d;
+    background: white;
+    color: #3498db;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.tab-btn.active {
-    background: linear-gradient(135deg, #3498db, #2980b9);
+.tab-btn:hover {
+    background: #3498db;
     color: white;
-    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
 }
 
-.tab-btn:hover:not(.active) {
-    background: #f8f9fa;
-    color: #3498db;
+.tab-btn.active {
+    background: #3498db;
+    color: white;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
 }
 
 /* Controls section */
 .controls {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 .filter-section {
@@ -118,6 +112,20 @@ body {
 }
 
 /* Search section */
+.search-section {
+    flex: 2;
+    min-width: 300px;
+    max-width: 500px;
+}
+
+.search-section label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+}
+
 .search-box {
     position: relative;
     display: flex;
@@ -171,7 +179,7 @@ body {
 
 /* Button styles */
 .status-btn {
-    background: linear-gradient(135deg, #27ae60, #219a52);
+    background: linear-gradient(135deg, #3498db, #2980b9);
     color: white;
     border: none;
     border-radius: 8px;
@@ -191,7 +199,7 @@ body {
 .status-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
-    background: linear-gradient(135deg, #219a52, #1e8449);
+    background: linear-gradient(135deg, #2980b9, #2573a7);
 }
 
 /* Table styles */
@@ -254,7 +262,7 @@ body {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    min-width: 120px;
+    min-width: 100px;
 }
 
 .status-badge.success {
@@ -330,6 +338,11 @@ body {
     width: 12px;
 }
 
+/* Remove gradients and shadows to match simple design */
+.action-btn {
+    box-shadow: none;
+}
+
 /* Modal center alignment */
 .modal {
     display: none;
@@ -349,7 +362,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     width: 90%;
-    max-width: 600px;
+    max-width: 500px;
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
@@ -374,6 +387,14 @@ body {
 
 .form-row .form-group {
     flex: 1;
+}
+
+/* Responsive for form */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: 10px;
+    }
 }
 
 .close {
@@ -426,12 +447,6 @@ body {
     outline: none;
     border-color: #3498db;
     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-}
-
-.form-group input:read-only {
-    background-color: #f8f9fa;
-    color: #6c757d;
-    cursor: not-allowed;
 }
 
 .form-actions {
@@ -576,8 +591,14 @@ body {
         gap: 15px;
     }
     
-    .filter-group {
+    .filter-group,
+    .search-section {
         min-width: 100%;
+        max-width: 100%;
+    }
+    
+    .search-section {
+        order: -1;
     }
 }
 
@@ -589,7 +610,12 @@ body {
     
     .tab-menu {
         flex-direction: column;
-        gap: 10px;
+        align-items: center;
+    }
+    
+    .tab-btn {
+        width: 100%;
+        max-width: 300px;
     }
     
     .filter-section {
@@ -612,11 +638,6 @@ body {
     
     #transactionForm {
         padding: 0 20px 20px;
-    }
-    
-    .form-row {
-        flex-direction: column;
-        gap: 10px;
     }
     
     .form-actions {
@@ -733,16 +754,6 @@ select:focus {
     outline-offset: 2px;
 }
 
-/* Currency formatting */
-.currency {
-    font-weight: 600;
-    color: #27ae60;
-}
-
-.currency.negative {
-    color: #e74c3c;
-}
-
 /* Print styles */
 @media print {
     .filter-section,
@@ -761,18 +772,4 @@ select:focus {
         box-shadow: none;
         border: 1px solid #ddd;
     }
-}
-
-/* Amount column styling */
-.amount-column {
-    text-align: right !important;
-    font-weight: 600;
-}
-
-.amount-positive {
-    color: #27ae60;
-}
-
-.amount-negative {
-    color: #e74c3c;
 }
