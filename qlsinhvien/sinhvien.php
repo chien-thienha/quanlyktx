@@ -348,7 +348,7 @@ if (isset($_SESSION['toast_message'])) {
                 <div class="form-actions">
                     <button type="button" onclick="closeModal()">Hủy</button>
                     <button type="submit" name="update_student" id="updateBtn" style="display:none;">Cập nhật</button>
-                    <button type="submit" name="add_student" id="addBtn">Thêm</button>
+                    <button type="submit" name="add_student" id="addBtn">Thêm sinh viên</button>
                 </div>
             </form>
         </div>

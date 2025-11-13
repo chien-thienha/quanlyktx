@@ -234,9 +234,11 @@ if (isset($_SESSION['toast_message'])) {
                     <select name="loaigiaodich" class="filter-select" onchange="this.form.submit()">
                         <option value="Tất cả">Tất cả</option>
                         <option value="Tiền phòng" <?= ($loaigiaodich_filter == 'Tiền phòng') ? 'selected' : '' ?>>Tiền phòng</option>
-                        <option value="Điện, nước, tiện ích" <?= ($loaigiaodich_filter == 'Điện, nước, tiện ích') ? 'selected' : '' ?>>Điện, nước, tiện ích</option>
-                        <option value="Hành chính, dịch vụ" <?= ($loaigiaodich_filter == 'Hành chính, dịch vụ') ? 'selected' : '' ?>>Hành chính, dịch vụ</option>
+                        <option value="Tiền điện, nước" <?= ($loaigiaodich_filter == 'Tiền điện, nước') ? 'selected' : '' ?>>Tiền điện, nước</option>
+                        <option value="Tiền Internet/Wi-Fi" <?= ($loaigiaodich_filter == 'Tiền Internet/Wi-Fi') ? 'selected' : '' ?>>Tiền Internet/Wi-Fi</option>
+                        <option value="Tiền vệ sinh, rác" <?= ($loaigiaodich_filter == 'Tiền vệ sinh, rác') ? 'selected' : '' ?>>Tiền vệ sinh, rác</option>
                         <option value="Tài sản, thiết bị" <?= ($loaigiaodich_filter == 'Tài sản, thiết bị') ? 'selected' : '' ?>>Tài sản, thiết bị</option>
+                        <option value="Tiền đặt cọc" <?= ($loaigiaodich_filter == 'Tiền đặt cọc') ? 'selected' : '' ?>>Tiền đặt cọc</option>
                         <option value="Khác" <?= ($loaigiaodich_filter == 'Khác') ? 'selected' : '' ?>>Khác</option>
                     </select>
                 </div>
@@ -352,9 +354,11 @@ if (isset($_SESSION['toast_message'])) {
                         <label>Loại giao dịch:</label>
                         <select name="loaigiaodich" id="loaigiaodich" required>
                             <option value="Tiền phòng">Tiền phòng</option>
-                            <option value="Điện, nước, tiện ích">Điện, nước, tiện ích</option>
-                            <option value="Hành chính, dịch vụ">Hành chính, dịch vụ</option>
+                            <option value="Tiền điện, nước">Tiền điện, nước</option>
+                            <option value="Tiền Internet/Wi-Fi">Tiền Internet/Wi-Fi</option>
+                            <option value="Tiền vệ sinh, rác">Tiền vệ sinh, rác</option>
                             <option value="Tài sản, thiết bị">Tài sản, thiết bị</option>
+                            <option value="Tiền đặt cọc">Tiền đặt cọc</option>
                             <option value="Khác">Khác</option>
                         </select>
                     </div>
@@ -385,7 +389,7 @@ if (isset($_SESSION['toast_message'])) {
                 <div class="form-actions">
                     <button type="button" onclick="closeModal()">Hủy</button>
                     <button type="submit" name="update_transaction" id="updateBtn" style="display:none;">Cập nhật</button>
-                    <button type="submit" name="add_transaction" id="addBtn">Thêm</button>
+                    <button type="submit" name="add_transaction" id="addBtn">Thêm giao dịch</button>
                 </div>
             </form>
         </div>
