@@ -171,12 +171,12 @@ h1 {
 }
 
 .btn-edit {
-    background: #f39c12;
+    background: #27ae60;
     color: white;
 }
 
 .btn-edit:hover {
-    background: #e67e22;
+    background: #219a52;
 }
 
 .btn-cancel {
@@ -357,6 +357,8 @@ h1 {
     color: #2c3e50;
     font-size: 20px;
     font-weight: 600;
+    text-align: center;
+    justify-content: center;
     margin: 0;
 }
 
@@ -375,7 +377,7 @@ h1 {
 
 /* Form styles */
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     padding: 0 25px;
 }
 

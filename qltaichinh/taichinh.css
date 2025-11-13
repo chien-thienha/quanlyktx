@@ -1,344 +1,778 @@
+/* Reset và base styles */
 * {
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-  color: #1f2937;
-  background: #f8fafc;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
 }
 
-/* TRANG QUẢN LÝ TÀI CHÍNH */
 .finance-page {
-  max-width: 1200px;
-  margin: 20px auto;
-  background: #fff;
-  padding: 0 10px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* --- TIÊU ĐỀ TRANG --- */
+/* Header styles */
 .finance-page h1 {
-  margin-bottom: 10px;
-  font-size: 24px;
-  color: #1e88e5;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
 }
 
-/* --- TAB MENU --- */
+/* Tab menu styles */
 .tab-menu {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  border-bottom: 2px solid #e0e0e0;
-  padding-bottom:10px;
-  margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    background: white;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tab-menu a {
+    text-decoration: none;
+    flex: 1;
 }
 
 .tab-btn {
-  background: none;
-  border: none;
-  font-size: 16px;
-  color: #555;
-  cursor: pointer;
-  padding: 8px 16px;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-}
-
-.tab-btn:hover {
-  background-color: #0d47a1;
-  color: white;
+    width: 100%;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #7f8c8d;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .tab-btn.active {
-  background-color: #1565c0;
-  color: white;
-  font-weight: 600;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
 }
 
-/* --- BỘ LỌC & THANH CÔNG CỤ --- */
-.controls, .filter {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
+.tab-btn:hover:not(.active) {
+    background: #f8f9fa;
+    color: #3498db;
+}
+
+/* Controls section */
+.controls {
+    margin-bottom: 25px;
 }
 
 .filter-section {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    flex-wrap: wrap;
 }
 
 .filter-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+    flex: 1;
+    min-width: 200px;
 }
 
 .filter-group label {
-  font-weight: 600;
-  font-size: 14px;
-  color: #374151;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
 }
 
 .filter-select {
-  padding: 6px 10px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  background-color: #fff;
-  font-size: 14px;
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: white;
+    cursor: pointer;
 }
 
-/* NÚT TRẠNG THÁI */
-.status-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.filter-select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
-.status-btn {
-  padding: 6px 10px;
-  border: 1px solid #cbd5e1;
-  background-color: #fff;
-  border-radius: 6px;
-  color: #374151;
-  font-size: 14px;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.status-btn:hover:not(.active) {
-  background-color: #0d47a1;
-  color: white;
-}
-
-.status-btn.active {
-  background-color: #1565c0;
-  color: white;
-}
-
-/* NÚT HÀNH ĐỘNG */
-.action-btn {
-  background-color: #1565c0;
-  color: white;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.2s ease;
-}
-
-.action-btn:hover {
-  background-color: #0d47a1;
-}
-
-/* THANH TÌM KIẾM PHẢI */
-.search-section {
-  display: flex;
-  justify-content: flex-end;
-}
-
+/* Search section */
 .search-box {
-  display: flex;
-  align-items: center;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  background: #fff;
-  overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
-.search-box input {
-  padding: 6px 10px;
-  border: none;
-  outline: none;
-  flex: 1;
-  min-width: 220px;
-  font-size: 14px;
-  color: #374151;
+.search-input {
+    width: 100%;
+    padding: 12px 50px 12px 15px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: white;
 }
 
-.search-filter {
-  border: none;
-  border-left: 1px solid #cbd5e1;
-  padding: 6px 10px;
-  background: #fff;
-  font-size: 14px;
-  cursor: pointer;
-  color: #374151;
+.search-input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
-.search-box button {
-  background: #1565c0;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  cursor: pointer;
-  transition: all 0.2s;
+.search-loading {
+    position: absolute;
+    right: 40px;
+    color: #3498db;
+    font-size: 14px;
 }
 
-.search-box button:hover {
-  background: #0d47a1;
+.clear-search-btn {
+    position: absolute;
+    right: 10px;
+    background: #95a5a6;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s ease;
 }
 
-/* --- BẢNG DỮ LIỆU --- */
+.clear-search-btn:hover {
+    background: #7f8c8d;
+    transform: scale(1.1);
+}
+
+/* Button styles */
+.status-btn {
+    background: linear-gradient(135deg, #27ae60, #219a52);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+    width: 100%;
+    justify-content: center;
+}
+
+.status-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+    background: linear-gradient(135deg, #219a52, #1e8449);
+}
+
+/* Table styles */
 .table-container {
-  background: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid white;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    margin-top: 20px;
 }
 
 .finance-table {
-  width: 100%;
-  border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.finance-table thead {
+    background: linear-gradient(135deg, #34495e, #2c3e50);
 }
 
 .finance-table th {
-  background: #1565c0;
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 14px;
-  color: white;
-  border-bottom: 1px solid #e5e7eb;
+    padding: 18px 15px;
+    text-align: center;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #ecf0f1;
 }
 
 .finance-table td {
-  padding: 6px 10px;
-  border: 1px solid #ddd;
-  border-bottom: 1px solid #f3f4f6;
-  font-size: 14px;
-  text-align: center;
+    padding: 16px 15px;
+    border-bottom: 1px solid #ecf0f1;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
 }
 
-.finance-table tr:last-child td {
-  border-bottom: none;
+.finance-table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.finance-table tbody tr:hover {
+    background: #f8f9fa;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.finance-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Status badges */
+.status-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    min-width: 120px;
+}
+
+.status-badge.success {
+    background: linear-gradient(135deg, #27ae60, #219a52);
+    color: white;
+    box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+}
+
+.status-badge.pending {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+}
+
+/* Action buttons */
+.action-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
 }
 
 .action-btn {
-  padding: 6px 12px;
-  border: 1px solid #d1d5db;
-  background: #1565c0;
-  color: white;
-  justify-self: center;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.action-btn.view {
-  background: #0d47a1;
-  color: white;
-  border-color: white;
-}
-
-.action-btn:hover {
-  filter: brightness(0.95);
-  background: #0d47a1;
-}
-
-/* TRẠNG THÁI THANH TOÁN */
-.table-actions {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-}
-
-.action-btn.small {
-  padding: 4px 8px;
-  font-size: 12px;
-}
-
-.action-btn.view {
-  background: #1565c0;
-  color: white;
-}
-
-.action-btn.confirm {
-  background: #059669;
-  color: white;
-}
-
-/* --- TIÊU ĐỀ PHẦN --- */
-.section h3 {
-  background: #1565c0;
-  color: white;
-  padding: 10px 14px;
-  border-radius: 6px 6px 0 0;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* --- BẢNG KHOẢN THU --- */
-.fee-table {
-  width: 100%;
-  border-collapse: collapse;
-  border: 1px solid #e5e7eb;
-}
-
-.fee-table th {
-  background: #1565c0;
-  border: 1px solid #ddd;
-  color: white;
-  padding: 10px;
-  text-align: center;
-  font-size: 16px;
-}
-
-.fee-table td {
-  border: 1px solid #ddd;
-  padding: 8px 10px;
-  border: 1px solid #f1f5f9;
-  text-align: left;
-  vertical-align: middle;
-  color: #374151;
-}
-
-.fee-table tr:nth-child(even) {
-  background-color: #f9fafb;
-}
-
-.fee-table td:nth-child(3) {
-  text-align: center; /* canh giữa cột giá trị */
-  font-weight: bold;
-  color: #2a7b2a;
-}
-
-/* --- RESPONSIVE --- */
-@media (max-width: 768px) {
-  .controls {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .search-section {
-    width: 100%;
-    justify-content: flex-end;
-  }
-  .search-input {
-    width: 100%;
-  }
-  .finance-table th, .finance-table td {
-    padding: 8px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
     font-size: 12px;
-  }
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-width: 60px;
+    text-decoration: none;
+}
+
+.action-btn.view {
+    background: #3498db;
+    color: white;
+}
+
+.action-btn.view:hover {
+    background: #2980b9;
+    transform: translateY(-1px);
+}
+
+.action-btn.edit {
+    background: #f39c12;
+    color: white;
+}
+
+.action-btn.edit:hover {
+    background: #e67e22;
+    transform: translateY(-1px);
+}
+
+.action-btn.delete {
+    background: #e74c3c;
+    color: white;
+}
+
+.action-btn.delete:hover {
+    background: #c0392b;
+    transform: translateY(-1px);
+}
+
+.action-btn i {
+    font-size: 11px;
+    width: 12px;
+}
+
+/* Modal center alignment */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    margin: auto;
+}
+
+.modal-content h2 {
+    color: #2c3e50;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    text-align: center;
+    padding-top: 15px;
+}
+
+/* Form row for 2-column layout */
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #7f8c8d;
+    transition: color 0.3s ease;
+    background: none;
+    border: none;
+    z-index: 1001;
+}
+
+.close:hover {
+    color: #e74c3c;
+}
+
+/* Form styles */
+#transactionForm {
+    padding: 0 30px 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.form-group input:read-only {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    cursor: not-allowed;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ecf0f1;
+}
+
+.form-actions button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    min-width: 100px;
+}
+
+.form-actions button[type="submit"] {
+    background: linear-gradient(135deg, #27ae60, #219a52);
+    color: white;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+.form-actions button[type="submit"]:hover {
+    background: linear-gradient(135deg, #219a52, #1e8449);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+}
+
+.form-actions button[type="button"] {
+    background: #95a5a6;
+    color: white;
+}
+
+.form-actions button[type="button"]:hover {
+    background: #7f8c8d;
+    transform: translateY(-2px);
+}
+
+/* Toast notifications */
+.toast {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    padding: 18px;
+    margin-bottom: 15px;
+    min-width: 350px;
+    transform: translateX(400px);
+    opacity: 0;
+    transition: all 0.4s ease;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.toast.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.toast.success {
+    border-left: 4px solid #27ae60;
+    background: linear-gradient(135deg, #fff, #f8fff9);
+}
+
+.toast.error {
+    border-left: 4px solid #e74c3c;
+    background: linear-gradient(135deg, #fff, #fff8f8);
+}
+
+.toast.warning {
+    border-left: 4px solid #f39c12;
+    background: linear-gradient(135deg, #fff, #fffbf0);
+}
+
+.toast-icon {
+    margin-right: 15px;
+    font-size: 22px;
+}
+
+.toast.success .toast-icon {
+    color: #27ae60;
+}
+
+.toast.error .toast-icon {
+    color: #e74c3c;
+}
+
+.toast.warning .toast-icon {
+    color: #f39c12;
+}
+
+.toast-content {
+    flex: 1;
+}
+
+.toast-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 15px;
+    color: #2c3e50;
+}
+
+.toast-message {
+    font-size: 14px;
+    color: #5d6d7e;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    color: #95a5a6;
+    cursor: pointer;
+    padding: 6px;
+    margin-left: 12px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.toast-close:hover {
+    background: #f8f9fa;
+    color: #7f8c8d;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .finance-page {
+        padding: 15px;
+    }
+    
+    .filter-section {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    
+    .filter-group {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .finance-page h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    
+    .tab-menu {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .filter-section {
+        padding: 20px;
+    }
+    
+    .finance-table {
+        font-size: 12px;
+    }
+    
+    .finance-table th,
+    .finance-table td {
+        padding: 12px 8px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 20px;
+    }
+    
+    #transactionForm {
+        padding: 0 20px 20px;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .form-actions button {
+        width: 100%;
+    }
+    
+    .toast {
+        min-width: 280px;
+        left: 50%;
+        transform: translateX(-50%) translateX(400px);
+    }
+    
+    .toast.show {
+        transform: translateX(-50%) translateX(0);
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        gap: 6px;
+    }
+    
+    .action-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .finance-page {
+        padding: 10px;
+    }
+    
+    .finance-page h1 {
+        font-size: 20px;
+    }
+    
+    .filter-section {
+        padding: 15px;
+    }
+    
+    .status-btn {
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+    
+    .finance-table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    .modal-content h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        padding-top: 25px;
+    }
+    
+    .close {
+        top: 15px;
+        right: 20px;
+        font-size: 24px;
+    }
+    
+    #transactionForm {
+        padding: 0 15px 15px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .action-btn {
+        min-width: 80px;
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+}
+
+/* Animation for table rows */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.finance-table tbody tr {
+    animation: fadeIn 0.3s ease;
+}
+
+/* Loading state for buttons */
+.status-btn:disabled,
+.action-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Focus styles for accessibility */
+button:focus,
+input:focus,
+select:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+}
+
+/* Currency formatting */
+.currency {
+    font-weight: 600;
+    color: #27ae60;
+}
+
+.currency.negative {
+    color: #e74c3c;
+}
+
+/* Print styles */
+@media print {
+    .filter-section,
+    .status-btn,
+    .action-buttons,
+    .tab-menu {
+        display: none;
+    }
+    
+    .finance-page {
+        max-width: none;
+        padding: 0;
+    }
+    
+    .table-container {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
+
+/* Amount column styling */
+.amount-column {
+    text-align: right !important;
+    font-weight: 600;
+}
+
+.amount-positive {
+    color: #27ae60;
+}
+
+.amount-negative {
+    color: #e74c3c;
 }

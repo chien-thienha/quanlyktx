@@ -346,11 +346,11 @@ body {
 
 .modal-content h2 {
     color: #2c3e50;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
     margin-bottom: 25px;
     text-align: center;
-    padding-top: 30px;
+    padding-top: 15px;
 }
 
 /* Form row for 2-column layout */
@@ -743,4 +743,3 @@ select:focus {
         border: 1px solid #ddd;
     }
 }
-

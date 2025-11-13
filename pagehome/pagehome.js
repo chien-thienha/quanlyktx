@@ -132,7 +132,7 @@ class AppRouter {
             'quanlytoanha': '../qlphong/toanha.php',
             'quanlytoanha/quanlyphong': '../qlphong/phong.php',
             'quanlysinhvien': '../qlsinhvien/sinhvien.php',
-            'quanlytaichinh': '../qltaichinh/taichinh.html',
+            'quanlytaichinh': '../qltaichinh/taichinh.php',
             'quanlyvipham': '../qlnoiquy/vipham.html',
             'quanlyhopdong': '../qlhopdong/hopdong.html',
             'thongke': '../thongke/tkphong.html'
