@@ -110,9 +110,6 @@ class AppRouter {
         </div>
     `;
 }
-
-
-
     showModule(modulePath) {
         // Ẩn phần welcome
         if (this.welcomeSection) this.welcomeSection.style.display = 'none';
@@ -137,7 +134,9 @@ class AppRouter {
             'quanlyvipham': '../qlnoiquy/vipham.php',
             'quanlyvipham/quanlynoiquy': '../qlnoiquy/noiquy.php',
             'quanlyhopdong': '../qlhopdong/hopdong.php',
-            'thongke': '../thongke/tkphong.html'
+            'thongke,baocao': '../thongke/thongke.php',
+            'quanlythongbao': '../qlthongbao/thongbao.php',
+            'hosocanhan': '../hoso/hscn.php',
         };
 
         let url = moduleUrls[moduleName];
