@@ -272,7 +272,7 @@ if (isset($_SESSION['toast_message'])) {
 
                 <div class="filter-group">
                     <button type="button" class="status-btn" onclick="showAddForm()">
-                        <i class="fas fa-plus-circle"></i> Thêm giao dịch
+                        <i class="fas fa-plus-circle"></i> Thêm giao dịch mới
                     </button>
                 </div>
             </div>

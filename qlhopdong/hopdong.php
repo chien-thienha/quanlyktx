@@ -259,9 +259,8 @@ $sinh_vien_result = $conn->query("SELECT idsinhvien, masinhvien, tensinhvien FRO
                     <tr>
                         <th>STT</th>
                         <th>Mã hợp đồng</th>
+                        <th>Mã sinh viên</th>
                         <th>Sinh viên</th>
-                        <th>Tòa nhà</th>
-                        <th>Phòng</th>
                         <th>Ngày bắt đầu</th>
                         <th>Ngày kết thúc</th>
                         <th>Trạng thái</th>
@@ -281,10 +280,8 @@ $sinh_vien_result = $conn->query("SELECT idsinhvien, masinhvien, tensinhvien FRO
                             <tr>
                                 <td><?php echo $stt++; ?></td>
                                 <td><?php echo htmlspecialchars($row['ma_hopdong']); ?></td>
-                                <!-- ĐÃ SỬA: tensinhvien thay vì ho_ten -->
-                                <td><?php echo htmlspecialchars($row['tensinhvien'] . ' (' . $row['masinhvien'] . ')'); ?></td>
-                                <td><?php echo htmlspecialchars($row['toa_nha']); ?></td>
-                                <td><?php echo htmlspecialchars($row['ten_phong']); ?></td>
+                                <td><?php echo htmlspecialchars($row['masinhvien']); ?></td>
+                                <td><?php echo htmlspecialchars($row['tensinhvien']); ?></td>
                                 <td><?php echo date('d/m/Y', strtotime($row['ngay_bat_dau'])); ?></td>
                                 <td><?php echo date('d/m/Y', strtotime($row['ngay_ket_thuc'])); ?></td>
                                 <td>
@@ -301,7 +298,7 @@ $sinh_vien_result = $conn->query("SELECT idsinhvien, masinhvien, tensinhvien FRO
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="9" style="text-align: center;">
+                            <td colspan="8" style="text-align: center;">
                                 <?php 
                                 if ($filter_trang_thai !== 'all' || !empty($search_keyword)) {
                                     echo "Không có hợp đồng nào phù hợp với bộ lọc đã chọn.";
@@ -411,8 +408,10 @@ $sinh_vien_result = $conn->query("SELECT idsinhvien, masinhvien, tensinhvien FRO
                     <label for="id_sinhvien">Sinh viên:</label>
                     <select id="id_sinhvien" name="id_sinhvien" required>
                         <option value="">-- Chọn sinh viên --</option>
-                        <?php while ($sv = $sinh_vien_result->fetch_assoc()): ?>
-                            <!-- ĐÃ SỬA: idsinhvien và tensinhvien -->
+                        <?php 
+                        // Reset con trỏ kết quả để lặp lại
+                        $sinh_vien_result->data_seek(0);
+                        while ($sv = $sinh_vien_result->fetch_assoc()): ?>
                             <option value="<?php echo $sv['idsinhvien']; ?>"><?php echo htmlspecialchars($sv['tensinhvien'] . ' - ' . $sv['masinhvien']); ?></option>
                         <?php endwhile; ?>
                     </select>
@@ -614,15 +613,11 @@ function viewContractFromTable(id) {
                         ghi_chu: match[9].replace(/\\'/g, "'") // Unescape quotes
                     };
                     
-                    // Tìm thêm thông tin sinh viên từ ô trong bảng
+                    // Lấy thông tin từ các ô trong bảng
                     const cells = row.querySelectorAll('td');
-                    if (cells.length >= 3) {
-                        const svText = cells[2].textContent;
-                        const svMatch = svText.match(/(.+) \((.+)\)/);
-                        if (svMatch) {
-                            contractData.tensinhvien = svMatch[1];
-                            contractData.masinhvien = svMatch[2];
-                        }
+                    if (cells.length >= 4) {
+                        contractData.masinhvien = cells[2].textContent; // Mã sinh viên
+                        contractData.tensinhvien = cells[3].textContent; // Tên sinh viên
                     }
 
                     // Thêm các trường mặc định cho sinh viên

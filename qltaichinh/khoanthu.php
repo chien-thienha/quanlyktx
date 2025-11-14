@@ -206,7 +206,7 @@ if (isset($_SESSION['toast_message'])) {
                 <div class="filter-group">
                     <label>Tìm kiếm:</label>
                     <div class="search-box">
-                        <input type="text" name="search" placeholder="Tìm kiếm khoản thu" class="search-input" 
+                        <input type="text" name="search" placeholder="Tìm kiếm thông tin" class="search-input" 
                                value="<?= htmlspecialchars($search_keyword) ?>" id="searchInput" oninput="handleSearchInput()">
                         
                         <button type="button" class="clear-search-btn" id="clearSearchBtn" onclick="clearSearch()" style="display: <?= $search_keyword ? 'flex' : 'none' ?>;">
@@ -220,7 +220,7 @@ if (isset($_SESSION['toast_message'])) {
                 </div>
                 <div class="filter-group">
                     <button type="button" class="status-btn" onclick="showAddForm()">
-                        <i class="fas fa-plus-circle"></i> Thêm khoản thu
+                        <i class="fas fa-plus-circle"></i> Thêm khoản thu mới
                     </button>
                 </div>
             </div>

@@ -609,16 +609,6 @@ if (isset($_SESSION['toast_message'])) {
             closeModal();
         }
     }
-
-    // Tự động focus vào ô tìm kiếm khi trang load
-    document.addEventListener('DOMContentLoaded', function() {
-        const searchInput = document.getElementById('searchInput');
-        if (searchInput) {
-            searchInput.focus();
-            // Đặt con trỏ ở cuối text
-            searchInput.setSelectionRange(searchInput.value.length, searchInput.value.length);
-        }
-    });
     </script>
 </body>
 </html>
