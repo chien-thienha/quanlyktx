@@ -2,7 +2,7 @@
     session_start();
     // Kiểm tra nếu đã đăng nhập
     if (isset($_SESSION['tendangnhap'])) {
-        header("Location: /pagehome/pagehome.php"); // Thêm
+        header("Location: quanlyktx/pagehome/pagehome.php"); // Thêm
         exit();
     } else {
         // Chuyển đến trang đăng nhập
@@ -10,4 +10,3 @@
         exit();
     }
 ?>
-

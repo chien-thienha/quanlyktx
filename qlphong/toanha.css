@@ -770,3 +770,202 @@ h1 {
     display: flex;
     align-items: center;
 }
+/* Fix for room info display */
+.room-info {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 4px solid #007bff;
+}
+
+.room-info h3 {
+    margin: 0 0 15px 0;
+    color: #2c3e50;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.room-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.room-detail-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.room-detail-label {
+    font-weight: 600;
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+.room-detail-value {
+    color: #333;
+    font-size: 1em;
+    font-weight: 500;
+}
+
+/* Fix for action buttons alignment */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.action-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0 2px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+/* Fix for table header alignment */
+.student-table thead th {
+    text-align: center;
+    vertical-align: middle;
+    padding: 15px 8px;
+}
+
+.student-table tbody td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 12px 8px;
+}
+
+/* Fix for status badges in table */
+.status-badge.dang-o {
+    background: linear-gradient(135deg, #27ae60, #219a52);
+    color: white;
+    box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+}
+
+/* Fix for filter actions layout */
+.filter-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Fix for page header */
+.page-header h1 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.building-name {
+    color: #3498db;
+    margin-left: 10px;
+}
+
+/* Fix for responsive table */
+@media (max-width: 768px) {
+    .action-buttons {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .action-btn {
+        width: 100%;
+        margin: 2px 0;
+    }
+    
+    .student-table {
+        font-size: 12px;
+    }
+    
+    .student-table th,
+    .student-table td {
+        padding: 8px 4px;
+    }
+}
+
+/* Fix for button colors in filter actions */
+.btn-add.violation {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-add.violation:hover {
+    background: #c0392b;
+}
+
+.btn-add.contract {
+    background: #27ae60;
+    color: white;
+}
+
+.btn-add.contract:hover {
+    background: #219a52;
+}
+
+/* Ensure proper spacing in filter section */
+.filter-section {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+/* Fix for table container overflow */
+.table-container {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+/* Fix for empty state */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+
+.empty-state i {
+    font-size: 48px;
+    color: #ccc;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* Fix for button icons */
+.btn-add i {
+    margin-right: 5px;
+}
+
+/* Ensure proper text alignment in all table cells */
+.student-table th,
+.student-table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Fix for status badge in table cells */
+.student-table .status-badge {
+    display: inline-block;
+    min-width: 80px;
+}

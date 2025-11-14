@@ -134,9 +134,11 @@ class AppRouter {
             'quanlyvipham': '../qlnoiquy/vipham.php',
             'quanlyvipham/quanlynoiquy': '../qlnoiquy/noiquy.php',
             'quanlyhopdong': '../qlhopdong/hopdong.php',
-            'thongke,baocao': '../thongke/thongke.php',
+            'thongke,baocao': '../thongke/tkphong.php',
+            'thongke,baocao/thongkevipham': '../thongke/tktc.php',
+            'thongke,baocao/thongketaichinh': '../thongke/tkvp.php',
             'quanlythongbao': '../qlthongbao/thongbao.php',
-            'hosocanhan': '../hoso/hscn.php',
+            'hosocanhan': '../hoso/hscn.php'
         };
 
         let url = moduleUrls[moduleName];

@@ -47,7 +47,7 @@ require_once('../auth_check.php');
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item" href="../hosocanhan/hscn.html">
+                            <a class="dropdown-item" href="../../quanlyktx/hoso/hscn.php">
                                 <i class="fas fa-user me-2"></i>Hồ sơ cá nhân
                             </a>
                         </li>
@@ -99,7 +99,7 @@ require_once('../auth_check.php');
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-module="thongke">
+                            <a class="nav-link" href="#" data-module="thongke,baocao">
                                 <i class="fas fa-chart-pie me-2"></i>
                                 Thống kê, báo cáo
                             </a>
