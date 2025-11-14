@@ -113,8 +113,8 @@ require_once('../auth_check.php');
                 <!-- Welcome Section -->
                 <div class="welcome-section text-center py-5" id="welcomeSection">
                     <img src="../img/ictu.png" alt="ICTU" class="mb-4 main-logo">
-                    <h1 class="display-4 fw-bold text-primary">XIN CHÀO <?php echo strtoupper($_SESSION['tendangnhap']); ?>!</h1>
-                    <p class="lead text-muted">Chào mừng bạn đến với hệ thống quản lý ký túc xá ICTU</p>
+                    <h1 class="display-4 fw-bold text-primary">XIN CHÀO <?php echo strtoupper($_SESSION['tendangnhap']); ?></h1>
+                    <p class="lead text-muted">Chào mừng bạn đến với hệ thống quản lý ký túc xá ICTU!</p>
                 </div>
 
                 <!-- Module Content Area -->

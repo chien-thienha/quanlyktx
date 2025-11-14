@@ -47,8 +47,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'get_vipham_details' && isset($
 
 // Xử lý tìm kiếm và lọc
 $search_keyword = $_GET['search'] ?? '';
-$search_type = $_GET['search_type'] ?? 'masinhvien';
 $trang_thai = $_GET['trang_thai'] ?? '';
+$muc_do = $_GET['muc_do'] ?? '';
 $from_date = $_GET['from_date'] ?? '';
 $to_date = $_GET['to_date'] ?? '';
 
@@ -159,20 +159,25 @@ $params = [];
 $types = "";
 
 if (!empty($search_keyword)) {
-    if ($search_type == 'masinhvien') {
-        $sql .= " AND masinhvien LIKE ?";
-        $params[] = "%$search_keyword%";
-        $types .= "s";
-    } elseif ($search_type == 'tensinhvien') {
-        $sql .= " AND tensinhvien LIKE ?";
-        $params[] = "%$search_keyword%";
-        $types .= "s";
-    }
+    // Tìm kiếm tất cả các trường: masinhvien, tensinhvien, mucdovipham, trangthai
+    $sql .= " AND (masinhvien LIKE ? OR tensinhvien LIKE ? OR mucdovipham LIKE ? OR trangthai LIKE ?)";
+    $search_param = "%$search_keyword%";
+    $params[] = $search_param;
+    $params[] = $search_param;
+    $params[] = $search_param;
+    $params[] = $search_param;
+    $types .= "ssss";
 }
 
 if (!empty($trang_thai)) {
     $sql .= " AND trangthai = ?";
     $params[] = $trang_thai;
+    $types .= "s";
+}
+
+if (!empty($muc_do)) {
+    $sql .= " AND mucdovipham = ?";
+    $params[] = $muc_do;
     $types .= "s";
 }
 
@@ -282,12 +287,24 @@ if (isset($_SESSION['toast_message'])) {
 
         <form method="GET" action="" class="controls" id="filterForm">
             <div class="filter-section">
+                <!-- Filter Trạng thái -->
                 <div class="filter-group">
                     <label>Trạng thái:</label>
                     <select name="trang_thai" class="filter-select" onchange="this.form.submit()">
                         <option value="">Tất cả trạng thái</option>
                         <option value="Đã xử lý" <?= $trang_thai == 'Đã xử lý' ? 'selected' : '' ?>>Đã xử lý</option>
                         <option value="Chưa xử lý" <?= $trang_thai == 'Chưa xử lý' ? 'selected' : '' ?>>Chưa xử lý</option>
+                    </select>
+                </div>
+
+                <!-- Filter Mức độ vi phạm -->
+                <div class="filter-group">
+                    <label>Mức độ vi phạm:</label>
+                    <select name="muc_do" class="filter-select" onchange="this.form.submit()">
+                        <option value="">Tất cả mức độ</option>
+                        <option value="Nhe" <?= $muc_do == 'Nhe' ? 'selected' : '' ?>>Nhẹ</option>
+                        <option value="Vừa" <?= $muc_do == 'Vừa' ? 'selected' : '' ?>>Vừa</option>
+                        <option value="Nặng" <?= $muc_do == 'Nặng' ? 'selected' : '' ?>>Nặng</option>
                     </select>
                 </div>
 
@@ -306,14 +323,16 @@ if (isset($_SESSION['toast_message'])) {
                 </div>
 
                 <div class="filter-date">
-                    <button type="button" class="filter-btn" onclick="clearFilters()"><i class="fa fa-refresh"></i> Xóa lọc</button>
+                    <button type="button" class="filter-btn" onclick="clearFilters()"><i class="fa fa-refresh"></i> Xóa bộ lọc</button>
                 </div>
 
                 <div class="search-section">
                     <label for="search">Tìm kiếm:</label>
-                    <div class="search-box">
-                        <input type="text" name="search" placeholder="Tìm kiếm thông tin" class="search-input" id="searchInput" 
-                                value="<?= htmlspecialchars($search_keyword) ?>" oninput="handleSearchInput()">
+                    <div class="search-container">
+                        <input type="text" name="search" placeholder="Tìm kiếm thông tin" 
+                               class="search-input" id="searchInput" 
+                               value="<?= htmlspecialchars($search_keyword) ?>" 
+                               oninput="handleSearchInput()">
                         <div class="search-loading" id="searchLoading" style="display: none;">
                             <i class="fas fa-spinner fa-spin"></i>
                         </div>
@@ -450,26 +469,71 @@ if (isset($_SESSION['toast_message'])) {
 
     <script>
     let searchTimeout = null;
+    let isSearching = false;
 
     function clearFilters() {
         window.location.href = 'vipham.php';
+    }
+
+    function clearSearch() {
+        document.getElementById('searchInput').value = '';
+        document.getElementById('filterForm').submit();
     }
 
     // Xử lý tìm kiếm real-time với delay 2 giây
     function handleSearchInput() {
         const searchInput = document.getElementById('searchInput');
         const searchValue = searchInput.value.trim();
+        const searchLoading = document.getElementById('searchLoading');
+        
+        // Hiển thị loading khi bắt đầu nháp
+        if (searchValue !== '' && !isSearching) {
+            searchLoading.style.display = 'block';
+            isSearching = true;
+        }
         
         // Xóa timeout cũ nếu có
         if (searchTimeout) {
             clearTimeout(searchTimeout);
         }
         
-        // Đặt timeout 2 giây
-        searchTimeout = setTimeout(() => {
+        // Nếu xóa hết nội dung, tìm kiếm ngay lập tức
+        if (searchValue === '') {
+            searchLoading.style.display = 'none';
+            isSearching = false;
             document.getElementById('filterForm').submit();
+            return;
+        }
+        
+        // Đặt timeout 2 giây cho tìm kiếm
+        searchTimeout = setTimeout(() => {
+            performSearch();
         }, 2000);
     }
+
+    function performSearch() {
+        const searchLoading = document.getElementById('searchLoading');
+        
+        // Ẩn loading khi hoàn thành
+        searchLoading.style.display = 'none';
+        isSearching = false;
+        
+        // Submit form để thực hiện tìm kiếm
+        document.getElementById('filterForm').submit();
+    }
+
+    // Xử lý sự kiện phím Enter - tìm kiếm ngay lập tức
+    document.getElementById('searchInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            // Hủy timeout nếu có
+            if (searchTimeout) {
+                clearTimeout(searchTimeout);
+            }
+            // Thực hiện tìm kiếm ngay lập tức
+            performSearch();
+            e.preventDefault();
+        }
+    });
 
     function showAddForm() {
         document.getElementById('modalTitle').textContent = 'Thêm vi phạm';
@@ -517,7 +581,7 @@ if (isset($_SESSION['toast_message'])) {
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Lỗi khi tải thông tin vi phạm: ' + error.message);
+                alert('Lỗi khi tải thông tin vi phạm: ' . error.message);
                 closeModal();
             });
     }
@@ -545,6 +609,16 @@ if (isset($_SESSION['toast_message'])) {
             closeModal();
         }
     }
+
+    // Tự động focus vào ô tìm kiếm khi trang load
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.focus();
+            // Đặt con trỏ ở cuối text
+            searchInput.setSelectionRange(searchInput.value.length, searchInput.value.length);
+        }
+    });
     </script>
 </body>
 </html>

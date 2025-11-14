@@ -82,7 +82,7 @@ body {
 
 .filter-group {
     flex: 1;
-    min-width: 455px;
+    min-width: 210px;
 }
 
 .filter-group label {
@@ -165,9 +165,8 @@ body {
 
 /* Search section */
 .search-section {
-    flex: 1;
-    min-width: 350px;
-    max-width: 455px;
+    flex: 2;
+    min-width: 700px;
 }
 
 .search-section label {
@@ -178,7 +177,7 @@ body {
     font-size: 14px;
 }
 
-.search-box {
+.search-container {
     position: relative;
     display: flex;
     align-items: center;
@@ -186,7 +185,7 @@ body {
 
 .search-input {
     width: 100%;
-    padding: 12px 45px 12px 15px;
+    padding: 12px 50px 12px 15px;
     border: 2px solid #e1e8ed;
     border-radius: 8px;
     font-size: 14px;
@@ -205,6 +204,9 @@ body {
     right: 40px;
     color: #3498db;
     font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-clear-search {
@@ -222,6 +224,7 @@ body {
     cursor: pointer;
     font-size: 12px;
     transition: all 0.3s ease;
+    z-index: 2;
 }
 
 .btn-clear-search:hover {
@@ -418,26 +421,24 @@ body {
 .modal {
     display: none;
     position: fixed;
-    top: 0;
+    z-index: 1000;
     left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1000;
+    background-color: rgba(0,0,0,0.5);
     align-items: center;
     justify-content: center;
 }
 
 .modal-content {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    width: 90%;
-    max-width: 500px;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
+    background-color: #fefefe;
     margin: auto;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    animation: modalSlideIn 0.3s ease;
 }
 
 .modal-content h2 {
@@ -520,11 +521,22 @@ body {
     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .form-actions {
     display: flex;
     justify-content: flex-end;
     gap: 15px;
-    margin-top: 30px;
+    margin-top: 25px;
     padding-top: 20px;
     border-top: 1px solid #ecf0f1;
 }
@@ -537,7 +549,7 @@ body {
     font-size: 14px;
     font-weight: 600;
     transition: all 0.3s ease;
-    min-width: 100px;
+    min-width: 120px;
 }
 
 .form-actions button[type="submit"] {
@@ -876,6 +888,10 @@ select:focus {
 }
 
 /* Thêm vào noiquy.css */
+#noiquyForm {
+    padding: 0 30px 30px;
+}
+
 .form-group textarea {
     width: 100%;
     padding: 12px 15px;
@@ -886,11 +902,35 @@ select:focus {
     background: white;
     font-family: 'Inter', sans-serif;
     resize: vertical;
-    min-height: 80px;
+    min-height: 100px;
+    line-height: 1.5;
 }
 
 .form-group textarea:focus {
     outline: none;
     border-color: #3498db;
     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 20px;
+    }
+    
+    #noiquyForm {
+        padding: 0 20px 20px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .form-actions button {
+        width: 100%;
+    }
+    
+    .form-group textarea {
+        min-height: 120px;
+    }
 }

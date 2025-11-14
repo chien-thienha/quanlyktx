@@ -12,6 +12,31 @@ if (!isset($conn)) {
 $toast_message = '';
 $toast_type = '';
 
+// Xử lý AJAX lấy thông tin nội quy theo ID
+if (isset($_GET['action']) && $_GET['action'] == 'get_noiquy' && isset($_GET['id'])) {
+    header('Content-Type: application/json');
+    $id = intval($_GET['id']);
+    
+    try {
+        $sql = "SELECT * FROM noiquy WHERE idnoiquy = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows > 0) {
+            $noiquy = $result->fetch_assoc();
+            echo json_encode(['success' => true, 'noiquy' => $noiquy]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Không tìm thấy nội quy']);
+        }
+        $stmt->close();
+    } catch(Exception $e) {
+        echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+    }
+    exit;
+}
+
 // Xử lý thêm nội quy
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_noiquy'])) {
     try {
@@ -159,6 +184,168 @@ if (isset($_SESSION['toast_message'])) {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="noiquy.css">
+    <style>
+        /* Additional styles for modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #7f8c8d;
+            transition: color 0.3s ease;
+            background: none;
+            border: none;
+            z-index: 1001;
+        }
+
+        .close:hover {
+            color: #e74c3c;
+        }
+
+        .modal-content h2 {
+            color: #2c3e50;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            text-align: left;
+            padding: 20px 30px 0;
+        }
+
+        #noiquyForm {
+            padding: 0 30px 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: white;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+            line-height: 1.5;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+        }
+
+        .form-actions button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .form-actions button[type="submit"] {
+            background: linear-gradient(135deg, #27ae60, #219a52);
+            color: white;
+        }
+
+        .form-actions button[type="submit"]:hover {
+            background: linear-gradient(135deg, #219a52, #1e8449);
+            transform: translateY(-2px);
+        }
+
+        .form-actions button[type="button"] {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .form-actions button[type="button"]:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 20px;
+            }
+            
+            #noiquyForm {
+                padding: 0 20px 20px;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .form-actions button {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="page">
@@ -218,10 +405,7 @@ if (isset($_SESSION['toast_message'])) {
                     <label for="search">Tìm kiếm:</label>
                     <div class="search-box">
                         <input type="text" name="search" placeholder="Tìm kiếm thông tin" class="search-input" id="searchInput" 
-                                value="<?= htmlspecialchars($search_keyword) ?>" oninput="handleSearchInput()">
-                        <div class="search-loading" id="searchLoading" style="display: none;">
-                            <i class="fas fa-spinner fa-spin"></i>
-                        </div>
+                                value="<?= htmlspecialchars($search_keyword) ?>">
                         <?php if (!empty($search_keyword)): ?>
                         <button type="button" class="btn-clear-search" onclick="clearSearch()">
                             <i class="fas fa-times"></i>
@@ -286,7 +470,7 @@ if (isset($_SESSION['toast_message'])) {
                 
                 <div class="form-group">
                     <label>Nội dung nội quy:</label>
-                    <textarea name="noidungnoiquy" id="noidungnoiquyInput" rows="3" required 
+                    <textarea name="noidungnoiquy" id="noidungnoiquyInput" rows="4" required 
                               placeholder="Nhập nội dung nội quy..."></textarea>
                 </div>
 
@@ -325,24 +509,32 @@ if (isset($_SESSION['toast_message'])) {
         document.getElementById('noiquyId').value = '';
     }
 
-    function editNoiquy(id) {
-        // Trong thực tế, bạn cần gọi API để lấy thông tin nội quy theo ID
-        // Ở đây tôi sẽ hiển thị form với dữ liệu mẫu
-        document.getElementById('modalTitle').textContent = 'Sửa nội quy';
-        document.getElementById('addBtn').style.display = 'none';
-        document.getElementById('updateBtn').style.display = 'block';
-        document.getElementById('noiquyModal').style.display = 'block';
-        
-        // Đặt ID vào form
-        document.getElementById('noiquyId').value = id;
-        
-        // Trong thực tế, bạn cần gọi AJAX để lấy dữ liệu từ server
-        // Ở đây tôi chỉ hiển thị form trống
-        document.getElementById('noidungnoiquyInput').value = '';
-        document.getElementById('xulyviphamInput').value = '';
-        document.getElementById('ghichuInput').value = '';
-        
-        alert('Chức năng sửa sẽ được triển khai với AJAX để lấy dữ liệu từ server');
+    async function editNoiquy(id) {
+        try {
+            // Hiển thị loading state
+            document.getElementById('modalTitle').textContent = 'Đang tải...';
+            
+            const response = await fetch(`?action=get_noiquy&id=${id}`);
+            const data = await response.json();
+            
+            if (data.success) {
+                document.getElementById('modalTitle').textContent = 'Sửa nội quy';
+                document.getElementById('addBtn').style.display = 'none';
+                document.getElementById('updateBtn').style.display = 'block';
+                document.getElementById('noiquyModal').style.display = 'block';
+                
+                // Điền dữ liệu vào form
+                document.getElementById('noiquyId').value = data.noiquy.idnoiquy;
+                document.getElementById('noidungnoiquyInput').value = data.noiquy.noidungnoiquy || '';
+                document.getElementById('xulyviphamInput').value = data.noiquy.xulyvipham || '';
+                document.getElementById('ghichuInput').value = data.noiquy.ghichu || '';
+            } else {
+                alert('Không thể tải dữ liệu nội quy: ' + data.message);
+            }
+        } catch (error) {
+            console.error('Lỗi:', error);
+            alert('Lỗi khi tải dữ liệu nội quy');
+        }
     }
 
     function deleteNoiquy(id) {
@@ -362,6 +554,16 @@ if (isset($_SESSION['toast_message'])) {
             closeModal();
         }
     }
+
+    // Xử lý sự kiện submit form để validate
+    document.getElementById('noiquyForm').addEventListener('submit', function(e) {
+        const noidung = document.getElementById('noidungnoiquyInput').value.trim();
+        if (!noidung) {
+            e.preventDefault();
+            alert('Vui lòng nhập nội dung nội quy');
+            document.getElementById('noidungnoiquyInput').focus();
+        }
+    });
     </script>
 </body>
 </html>
